@@ -31,12 +31,14 @@ class Buisness {
         this.view.configureLeaveButton(this.onLeavePresser.bind(this));
         this.view.configureMutedButton(this.onMutedPresser.bind(this));
         this.view.configureVideoMutedButton(this.onVideoPresser.bind(this));
+        this.view.configureSendMsgButton(this.onMessageSend.bind(this));
 
         this.currentStream = await this.media.getCamera(true);
 
         this.socket = this.socketBuilder
         .setOnUserConnected(this.onUserConnected())
         .setOnUserDisconnected(this.onUserDisconnected())
+        .setOnMessage(this.onMessage())
         .build();
 
         this.currentPeer = await this.peerBuilder
@@ -70,6 +72,12 @@ class Buisness {
         return userId => {
             console.log('user connected!', userId);
             this.currentPeer.call(userId, this.currentStream);
+        }
+    }
+
+    onMessage () {
+        return message => {
+            this.view.setMessage(message);
         }
     }
 
@@ -191,6 +199,10 @@ class Buisness {
             userId: this.currentPeer.id,
             video: this.video
         };
+    }
+
+    onMessageSend(){
+        return this.socket;
     }
 
 }

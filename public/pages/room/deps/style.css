@@ -74,13 +74,63 @@
 
 .main__chat_window {
     flex-grow: 1;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
-.messages{
-    color: white;
-    list-style: none;
+div.messages{
+    padding: 4px 8px;
 }
+
+div.message{
+    padding: 8px 8px;
+    max-width: 90%;
+    min-width: 10%;
+    text-align: justify;
+    line-height: 1.4;
+    /* border-radius: 12px; */
+    margin-top: 12px;
+    color: white;
+    min-width: 23%;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+}
+
+div.received{
+    background-color: #f15946;
+    float: left;
+    border-top-right-radius: 13px;
+    border-top-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+}
+
+div.emit{
+    background-color: #1c4a1f;
+    float: right;
+    border-top-right-radius: 13px;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
+}
+
+/* Track */
+.main__chat_window::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  div.main__chat_window::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+    height: 5px;
+  }
+  /* Handle */
+  .main__chat_window::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  .main__chat_window::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
 
 .main__message_container {
     padding: 22px 12px;
@@ -92,6 +142,8 @@
     background-color: transparent;
     border: none;
     color: #F5F5F5;
+    margin-right: 8px;
+    border: 1px solid white;
 }
 
  

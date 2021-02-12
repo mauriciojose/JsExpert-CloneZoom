@@ -3,8 +3,8 @@ const onload = () => {
   const room = urlParams.get('room');
   console.log('this is the room', room)
 
-  // const socketUrl = 'http://localhost:3000';
-  const socketUrl = "https://hidden-beach-32915.herokuapp.com";
+  const socketUrl = 'http://localhost:3000';
+  // const socketUrl = "https://hidden-beach-32915.herokuapp.com";
   const socketBuilder = new SocketBuilder({ socketUrl });
 
   const peerConfig = Object.values({

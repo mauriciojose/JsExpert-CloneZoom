@@ -4,6 +4,22 @@ class View{
         this.leaveBnt = document.getElementById('leave');
         this.muteBnt = document.getElementById('mute');
         this.videoMuteBnt = document.getElementById('video-mute');
+
+        this.sendMsgBnt = document.getElementById('sendMsg');
+
+        this.textMessage = document.getElementById('chat_message');
+
+        this.listMessages = document.getElementById('listMessages');
+
+        this.textMessage.addEventListener('keyup', this.click.bind(this));
+    }
+
+    click(event){
+        console.log(this);
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            this.sendMsgBnt.click();
+        }
     }
 
     createVideoElement({ muted = true, src, srcObject }){
@@ -130,5 +146,41 @@ class View{
         this.videoMuteBnt.addEventListener('click', this.onVideoMutedClick(command));
     }
 
-    //this.videoMuteBnt
+    configureSendMsgButton(command){
+        this.sendMsgBnt.addEventListener('click', this.onSendMsgClick(command));
+    }
+
+    onSendMsgClick (command) {
+        return async() => {
+            const comando = command();
+            comando.emit('message', this.textMessage.value);
+            this.setMessageEmit(this.textMessage.value);
+            this.textMessage.value = "";
+            this.textMessage.focus();
+            // console.log(comando);
+          }
+    }
+
+    setMessage(message){
+        this.listMessages.innerHTML += `
+        <div class="message received">
+            <span class="">
+                ${message}
+            </span>
+        </div>
+        <div style="clear: both;"></div>
+        `;
+    }
+
+    setMessageEmit(message){
+        this.listMessages.innerHTML += `
+        <div class="message emit">
+            <span class="">
+                ${message}
+            </span>
+        </div>
+        <div style="clear: both;"></div>
+        `;
+    }
+
 }

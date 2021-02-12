@@ -25,6 +25,12 @@ io.on('connection', socket => {
             console.log('disconnected!', roomId, userId);
             socket.to(roomId).broadcast.emit('user-disconnected', userId);
         });
+
+        socket.on('message', (message) => {
+            console.log('message!', message);
+            socket.to(roomId).broadcast.emit('message', message);
+        });
+
     });
 });
 
